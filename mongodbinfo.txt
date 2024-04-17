@@ -7,5 +7,5 @@ Password:
 
 Connect to Cluster0 
 Add your connection string into your application code: 
-
+mongodb+srv://dinukahamarasinghe:QD1FBKcmpI6fNyNN@todo-app.artbnpa.mongodb.net/?retryWrites=true&w=majority&appName=Todo-App
 Replace <password> with the password for the todoListApp user.
