@@ -30,7 +30,7 @@ app.get('/', async (req, res) => {
     }
     catch (err) {
         res.send(500, error);
-        res.redirect('/');
+        res.redirect("/");
     }
 });
 
@@ -44,8 +44,18 @@ app.post('/', async (req, res) => {
     }
     catch (err) {
         res.send(500, error);
-        res.redirect('/');
+        res.redirect("/");
     }
 });
 
-
+app.route("/remove/:id").get(async (req, res) => {
+    const id = req.params.id;
+    await ToDoTask.findByIdAndDelete(id);
+    try {
+        res.redirect("/");
+    }
+    catch (err) {
+        res.send(500, error);
+        res.redirect("/");
+    }
+});
