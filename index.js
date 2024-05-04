@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 const mongoose = require("mongoose");
 const ToDoTask = require("./models/TodoTask.js");
+const TodoTask = require('./models/TodoTask.js');
 const port = 3000;
 
 app.use(express.urlencoded({ extended: true }));
@@ -59,3 +60,26 @@ app.route("/remove/:id").get(async (req, res) => {
         res.redirect("/");
     }
 });
+
+app
+    .route("/edit/:id")
+    .get(async (req, res) => {
+        const id = req.params.id;
+        try {
+            const taskedits = await TodoTask.find({},);
+            res.render("todoEdit.ejs", { todoTasks: taskedits, idTask: id });
+        }
+        catch (err) {
+            res.send(500, err);
+            res.redirect("/");
+        }
+    }).post(async (req, res) => {
+        const id = req.params.id;
+        await ToDoTask.findByIdAndUpdate(id, { content: req.body.content });
+        try {
+            res.redirect("/");
+        } catch (err) {
+            res.send(500, err);
+            res.redirect("/");
+        }
+    });
